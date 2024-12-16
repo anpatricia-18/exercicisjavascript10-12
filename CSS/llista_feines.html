@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="CSS/llista_feines.css">
+    <title>Afegir tasques</title>
+</head>
+<body>
+    <div id="taskContainer">
+        <h1>Lista de tareas</h1>
+        <div class="inputContainer">
+          <input type="text" id="newTaskInput" placeholder="Inserta una nueva tarea">
+          <button id="addTaskBtn">Agregar tarea</button>
+        </div>
+        <ul id="taskList">
+          <!-- Aquí se agregarán las tareas -->
+        </ul>
+        <script>
+          // Quan es doni click, el text de la caixa de text s’haurà d’afegir com un nou element de llista a la pàgina web. 
+          // Haureu d’utilitzar createElement, i afegir a la llista (el membre és afegir-fills, 
+          // pero el mètode és amb angles), al afegir el quadre de text ha de quedar amb blanc.
+          //V2.0 : Al element item de la llista, abans d’afegir-lo fes-li un botó amb la lletra X, 
+          // que tingui un listener, que borri el element li (.remove()).
+
+          // Selecciona els elements necessaris
+const input = document.querySelector('#inputBox'); // Caixa de text
+const button = document.querySelector('#addButton'); // Botó per afegir
+const list = document.querySelector('#list'); // Llista on s'afegiran elements
+
+// Afegeix un eventListener al botó
+button.addEventListener('click', () => {
+    // Recupera el valor del quadre de text
+    const text = input.value.trim();
+// input.value: Obté el text introduït al quadre de text.
+//trim(): Elimina els espais en blanc al principi i al final del text.
+//if (text !== ''): Assegura que el text no està buit abans de continuar.
+    if (text !== '') {
+        // Crea un nou element de llista (li)
+        const listItem = document.createElement('li');
+
+        // Crea el botó d'eliminació
+        const deleteButton = document.createElement('button');
+        deleteButton.textContent = 'X'; // Assigna la lletra "X" al botó
+        deleteButton.style.marginLeft = '10px'; // Afegeix espai entre el text i el botó
+
+        // Afegeix un eventListener al botó d'eliminació
+        deleteButton.addEventListener('click', () => {
+            listItem.remove(); // Elimina l'element li quan es faci clic
+        });
+
+        // Afegeix el text i el botó al nou element de la llista
+        listItem.textContent = text; // Afegeix el text introduït al quadre de text com a contingut del <li>.
+        listItem.appendChild(deleteButton); //Adjunta el botó d'eliminació com a fill del <li>.
+
+        // Afegeix el nou element de la llista a la llista existent
+        list.appendChild(listItem);
+
+        // Neteja el valor del quadre de text
+        input.value = '';
+    } else {
+        alert('El quadre de text està buit!'); // Mostra un missatge d'error si el quadre de text està buit
+    }
+});
+
+
+      </script>
+      </div>
+</body>
+</html>
